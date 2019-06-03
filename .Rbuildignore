@@ -13,3 +13,4 @@
 ^tmp$
 ^notes$
 ^\.gitlab-ci\.yml$
+^data-raw$

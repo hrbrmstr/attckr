@@ -20,6 +20,7 @@ Depends:
     R (>= 3.2.0)
 Imports:
     httr,
-    jsonlite
+    jsonlite,
+    tibble
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
