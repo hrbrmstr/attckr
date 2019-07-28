@@ -5,7 +5,7 @@ public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostat
 [![Signed
 by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keybase.io/hrbrmstr)
 ![Signed commit
-%](https://img.shields.io/badge/Signed_Commits-75.0%25-lightgrey.svg)
+%](https://img.shields.io/badge/Signed_Commits-100%25-lightgrey.svg)
 [![Linux build
 Status](https://travis-ci.org/hrbrmstr/attckr.svg?branch=master)](https://travis-ci.org/hrbrmstr/attckr)  
 ![Minimal R
@@ -94,6 +94,20 @@ tidy_attack
 
 ``` r
 events <- read_events(system.file("extdat/sample-incidents.csv.gz", package = "attckr"))
+## Parsed with column specification:
+## cols(
+##   event_id = col_character(),
+##   incident_id = col_character(),
+##   event_ts = col_date(format = ""),
+##   detection_ts = col_date(format = ""),
+##   tactic = col_character(),
+##   technique = col_character(),
+##   discovery_source = col_character(),
+##   reporting_source = col_character(),
+##   responder_id = col_character()
+## )
+## You appear to be using Tactic ids.
+## You appear to be using Techinque ids.
 
 count(head(events, 30), tactic, technique) %>%
   mutate(tactic = fct_tactic(tactic, "pretty", "nl")) %>%

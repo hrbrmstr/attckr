@@ -42,7 +42,7 @@ packageVersion("attckr")
 tidy_attack
 ```
 
-```{r events, fig.width=11, fig.height=6}
+```{r events, message=TRUE, fig.width=11, fig.height=6}
 events <- read_events(system.file("extdat/sample-incidents.csv.gz", package = "attckr"))
 
 count(head(events, 30), tactic, technique) %>%
