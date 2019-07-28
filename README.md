@@ -51,6 +51,8 @@ The following functions are implemented:
 ## Installation
 
 ``` r
+install.packages("attckr", repos = "https://cinc.rud.is")
+# or
 remotes::install_git("https://git.rud.is/hrbrmstr/attckr.git")
 # or
 remotes::install_git("https://git.sr.ht/~hrbrmstr/attckr")
@@ -58,6 +60,8 @@ remotes::install_git("https://git.sr.ht/~hrbrmstr/attckr")
 remotes::install_gitlab("hrbrmstr/attckr")
 # or
 remotes::install_bitbucket("hrbrmstr/attckr")
+# or
+remotes::install_github("hrbrmstr/attckr")
 ```
 
 NOTE: To use the ‘remotes’ install options you will need to have the
