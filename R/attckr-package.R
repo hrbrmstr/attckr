@@ -14,5 +14,8 @@
 #' @docType package
 #' @author Bob Rudis (bob@@rud.is)
 #' @import tibble ggplot2 shiny rmarkdown stringi
+#' @importFrom glue glue
+#' @importFrom dplyr filter distinct mutate select case_when
+#' @importFrom readr read_csv
 #' @importFrom jsonlite fromJSON
 "_PACKAGE"

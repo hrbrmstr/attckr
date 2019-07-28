@@ -4,8 +4,54 @@
 \alias{read_events}
 \title{Read in ATT&CK events from a file}
 \usage{
-read_events(path)
+read_events(path, matrix = c("enterprise", "mobile", "pre"), ...)
+}
+\arguments{
+\item{path}{path to a CSV file that contains ATT&CK events. This will be \code{\link[=path.expand]{path.expand()}}ed.}
+
+\item{matrix}{which matrix are the events associated with?}
+
+\item{...}{passed on to \code{\link[readr:read_csv]{readr::read_csv()}}}
 }
 \description{
-Read in ATT&CK events from a file
+This is a convenience wrapper for \code{\link[readr:read_csv]{readr::read_csv()}} that sets up
+a contract to read in incident events with some pre-determined expectations.
+See Details for more information.
+}
+\details{
+While sufficient metadata and helpers have been provided with this package
+to enable customized use of the ATT&CK matricies sometimes you just want
+to get stuff done quickly and for that we need to establish some ground rules.
+
+This function defines and "incident event" record as something that
+contains the fields:
+\itemize{
+\item \code{event_id}: a unique identifier for this event
+\item \code{incident_id}: the associated incident for the \code{event_id}; again, a unique
+identifier for each incident
+\item \code{event_ts}: the timestamp for when the event occurred (anything date-like)
+\item \code{detection_ts}: the timestamp for when the event was detected (anything date-like)
+\item \code{tactic}: the ATT&CK Tactic; can be in "id" format (dashed lowercase), "pretty"
+(spaces, titlecase), or "newline" (newlines, titlecase)
+\item \code{technique}: the ATT&CK Technique id or precise spelling if spelled out
+\item \code{discovery_source}: free text field (it should still be "identifier-ish")
+that helps pinpoint which control/logging source enabled discovery of the
+event.
+\item \code{reporting_source}: free text field (it should still be "identifier-ish")
+that identifies what did the reporting for the \code{discovery_source}.
+\item \code{responder_id} the id of the incident reponder associated with this
+combination of \code{event_id} and \code{incident_id}.
+}
+
+You can think of \code{discovery_source} & \code{reporting_source} this way: say
+the Windows Event Log captured the evidence of a failed (or successful)
+local admin logon event. It passes that on to your centralized logging
+facility and/or your SIEM. You can make \code{discovery_source} "\code{Windows Event Log}"
+and \code{reporting_source} whichever technology you used.
+
+Any column not-present will be turned into \code{NA}. Columns not matching the
+above names will be removed from the object returned.
+}
+\examples{
+read_events(system.file("extdat/sample-incidents.csv.gz", package = "attckr"))
 }

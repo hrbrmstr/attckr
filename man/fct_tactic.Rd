@@ -20,3 +20,6 @@ fct_tactic(tactics, input = c("id", "pretty", "nl"),
 \description{
 Make an ordered Tactics factor with optional better labelling
 }
+\seealso{
+\link{tactics_f} for direct access to the ordered Tactics
+}

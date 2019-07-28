@@ -6,7 +6,7 @@ hrbrpkghelpr::global_opts()
 ```
 
 ```{r badges, results='asis', echo=FALSE, cache=FALSE}
-hrbrpkghelpr::stinking_badges()
+hrbrpkghelpr::stinking_badges(repo_status = "WIP")
 ```
 
 ```{r description, results='asis', echo=FALSE, cache=FALSE}
@@ -31,10 +31,38 @@ hrbrpkghelpr::install_block()
 
 ```{r lib-ex}
 library(attckr)
+library(tidyverse)
 
 # current version
 packageVersion("attckr")
 
+```
+
+```{r}
+tidy_attack
+```
+
+```{r events, fig.width=11, fig.height=6}
+events <- read_events(system.file("extdat/sample-incidents.csv.gz", package = "attckr"))
+
+count(head(events, 30), tactic, technique) %>%
+  mutate(tactic = fct_tactic(tactic, "pretty", "nl")) %>%
+  left_join(
+    filter(tidy_attack, matrix == "mitre-attack") %>%
+      distinct(id, technique),
+    c("technique" = "id")
+  ) %>%
+  complete(tactic, technique.y) %>%
+  mutate(technique.y = factor(technique.y, rev(sort(unique(technique.y))))) %>%
+  ggplot(aes(tactic, technique.y)) +
+  geom_tile(aes(fill = n), color = "#2b2b2b", size = 0.125) +
+  scale_x_discrete(expand = c(0, 0), position = "top") +
+  scale_fill_viridis_c(direction = -1, na.value = "white") +
+  labs(
+    x = NULL, y = NULL
+  ) +
+  theme_minimal() +
+  theme(panel.grid=element_blank())
 ```
 
 ## attckr Metrics

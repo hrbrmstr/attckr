@@ -30,6 +30,9 @@ Imports:
     jsonlite,
     tibble,
     ggplot2,
+    readr,
+    glue,
+    dplyr,
     shiny,
     stringi,
     rmarkdown
