@@ -1,0 +1,1 @@
+normalize_identifier <- function(x) { gsub("[[:space:]]+", "-", trimws(tolower(x))) }

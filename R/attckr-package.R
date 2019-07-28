@@ -1,13 +1,18 @@
-#' ...
+#' Analyze Adversary Tactics and Techniques Using the MITRE ATT&CK CTI Corpus
 #'
-#' - URL: <https://gitlab.com/hrbrmstr/attckr>
-#' - BugReports: <https://gitlab.com/hrbrmstr/attckr/issues>
+#' MITRE ATT&CK&trade; is a globally-accessible knowledge base of
+#' adversary tactics and techniques based on real-world observations.
+#' The ATT&CK knowledge base is used as a foundation for the development
+#' of specific threat models and methodologies in the private sector,
+#' in government, and in the cybersecurity product and service community.
+#' Tools are provided to analyze adversary tactics and techniques,
+#' build incident metrics, and identify high level program gaps
+#' using the MITRE ATT&CK CTI Corpus.
 #'
 #' @md
 #' @name attckr
 #' @docType package
 #' @author Bob Rudis (bob@@rud.is)
-#' @import httr
-#' @import tibble
+#' @import tibble ggplot2 shiny rmarkdown stringi
 #' @importFrom jsonlite fromJSON
-NULL
+"_PACKAGE"

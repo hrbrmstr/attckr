@@ -1,26 +1,37 @@
 Package: attckr
 Type: Package
-Title: attckr title goes here otherwise CRAN checks fail
+Title: Analyze Adversary Tactics and Techniques Using the MITRE ATT&CK CTI Corpus
 Version: 0.1.0
-Date: 2019-05-28
+Date: 2019-07-28
 Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640"))
   )
 Maintainer: Bob Rudis <bob@rud.is>
-Description: A good description goes here otherwise CRAN checks fail.
+Description: MITRE ATT&CK is a globally-accessible knowledge base of 
+    adversary tactics and techniques based on real-world observations. 
+    The ATT&CK knowledge base is used as a foundation for the development
+    of specific threat models and methodologies in the private sector, 
+    in government, and in the cybersecurity product and service community.
+    Tools are provided to analyze adversary tactics and techniques,
+    build incident metrics, and identify high level program gaps 
+    using the MITRE ATT&CK CTI Corpus.
 URL: https://gitlab.com/hrbrmstr/attckr
 BugReports: https://gitlab.com/hrbrmstr/attckr/issues
 Encoding: UTF-8
-License: AGPL
+License: Apache License 2.0 | file LICENSE
+LazyData: true
 Suggests:
     testthat,
     covr
 Depends:
     R (>= 3.2.0)
 Imports:
-    httr,
     jsonlite,
-    tibble
+    tibble,
+    ggplot2,
+    shiny,
+    stringi,
+    rmarkdown
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1

@@ -4,12 +4,24 @@
 \name{attckr}
 \alias{attckr}
 \alias{attckr-package}
-\title{...}
+\title{Analyze Adversary Tactics and Techniques Using the MITRE ATT&CK CTI Corpus}
 \description{
-\itemize{
-\item URL: \url{https://gitlab.com/hrbrmstr/attckr}
-\item BugReports: \url{https://gitlab.com/hrbrmstr/attckr/issues}
+MITRE ATT&CK™ is a globally-accessible knowledge base of
+adversary tactics and techniques based on real-world observations.
+The ATT&CK knowledge base is used as a foundation for the development
+of specific threat models and methodologies in the private sector,
+in government, and in the cybersecurity product and service community.
+Tools are provided to analyze adversary tactics and techniques,
+build incident metrics, and identify high level program gaps
+using the MITRE ATT&CK CTI Corpus.
 }
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://gitlab.com/hrbrmstr/attckr}
+  \item Report bugs at \url{https://gitlab.com/hrbrmstr/attckr/issues}
+}
+
 }
 \author{
 Bob Rudis (bob@rud.is)

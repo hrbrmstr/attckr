@@ -14,3 +14,4 @@
 ^notes$
 ^\.gitlab-ci\.yml$
 ^data-raw$
+^tools$
