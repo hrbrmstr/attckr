@@ -3,7 +3,15 @@
 \docType{data}
 \name{mobile_attack}
 \alias{mobile_attack}
-\title{Mobile Attack Taxonomy}
+\title{Mobile Attack Taxonomy v2.0}
 \description{
-Mobile Attack Taxonomy
+Mobile Attack Taxonomy v2.0
+}
+\note{
+Id: \code{bundle--eeb1ff74-2747-4602-96fb-e7b220361101}
+
+Last updated: 2019-07-31
+}
+\references{
+\url{https://github.com/mitre/cti/raw/master/mobile-attack/mobile-attack.json}
 }

@@ -2,7 +2,6 @@
 
 export(fct_tactic)
 export(read_events)
-export(tactics_f)
 export(validate_tactics)
 export(validate_technique_ids)
 export(validate_techniques)

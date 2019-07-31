@@ -32,11 +32,11 @@ CTI Corpus.
 
 The following functions are implemented:
 
-  - `enterprise_attack`: Enterprise Attack Taxonomy
+  - `enterprise_attack`: Enterprise Attack Taxonomy v2.0
   - `fct_tactic`: Make an ordered Tactics factor with optional better
     labelling
-  - `mobile_attack`: Mobile Attack Taxonomy
-  - `pre_attack`: Pre-Attack Taxonomy
+  - `mobile_attack`: Mobile Attack Taxonomy v2.0
+  - `pre_attack`: Pre-Attack Taxonomy v2.0
   - `read_events`: Read in ATT\&CK events from a file
   - `tactics_f`: Tactics factors (generally for sorting &
     pretty-printing)
@@ -47,6 +47,16 @@ The following functions are implemented:
   - `validate_technique_ids`: Validate Technique IDs
   - `validate_techniques`: Validate Techniques strings against MITRE
     authoritative source
+
+The following datasets are included:
+
+  - `enterprise_attack`: Enterprise Attack Taxonomy v2.0
+  - `mobile_attack`: Mobile Attack Taxonomy v2.0
+  - `pre_attack`: Pre-Attack Taxonomy v2.0
+  - `tactics_f`: Tactics factors (generally for sorting &
+    pretty-printing)
+  - `tidy_attack`: Combined ATT\&CK Matricies Tactics, Techniques and
+    Technique detail
 
 ## Installation
 
@@ -137,10 +147,10 @@ count(head(events, 30), tactic, technique) %>%
 
 ## attckr Metrics
 
-| Lang | \# Files |  (%) | LoC | (%) | Blank lines |  (%) | \# Lines |  (%) |
-| :--- | -------: | ---: | --: | --: | ----------: | ---: | -------: | ---: |
-| R    |       11 | 0.92 | 270 | 0.9 |          59 | 0.77 |      121 | 0.81 |
-| Rmd  |        1 | 0.08 |  29 | 0.1 |          18 | 0.23 |       29 | 0.19 |
+| Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
+| :--- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
+| R    |       10 | 0.91 | 203 | 0.86 |          57 | 0.74 |      144 | 0.81 |
+| Rmd  |        1 | 0.09 |  32 | 0.14 |          20 | 0.26 |       34 | 0.19 |
 
 ## Code of Conduct
 

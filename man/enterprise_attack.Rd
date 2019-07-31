@@ -3,7 +3,15 @@
 \docType{data}
 \name{enterprise_attack}
 \alias{enterprise_attack}
-\title{Enterprise Attack Taxonomy}
+\title{Enterprise Attack Taxonomy v2.0}
 \description{
-Enterprise Attack Taxonomy
+Enterprise Attack Taxonomy v2.0
+}
+\note{
+Id: \code{bundle--24c77e72-f42e-48e5-9f6c-5ddfc02e8399}
+
+Last updated: 2019-07-31
+}
+\references{
+\url{https://github.com/mitre/cti/raw/master/enterprise-attack/enterprise-attack.json}
 }

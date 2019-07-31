@@ -4,21 +4,33 @@
 \alias{fct_tactic}
 \title{Make an ordered Tactics factor with optional better labelling}
 \usage{
-fct_tactic(tactics, input = c("id", "pretty", "nl"),
-  output = c("pretty", "nl", "id"), matrix = c("enterprise", "mobile",
-  "pre"))
+fct_tactic(tactics, input = c("id", "pretty", "nl", "taid"),
+  output = c("pretty", "nl", "id", "taid"), matrix = c("enterprise",
+  "mobile", "pre"))
 }
 \arguments{
 \item{tactics}{a character vector}
 
-\item{input}{what is in \code{tactics}?}
+\item{input}{what is in \code{tactics}? (See Details)}
 
-\item{output}{what do you want the factor label to be?}
+\item{output}{what do you want the factor label to be? (See Details)}
 
-\item{matrix}{which matrix?}
+\item{matrix}{which matrix? ("\code{enterprise}", "\code{mobile}", "\code{pre}")}
 }
 \description{
-Make an ordered Tactics factor with optional better labelling
+Uses the metadat in \link{tactics_f} to make it easier to build ordered factors.
+}
+\details{
+You may receive Tatics encoded in one of many forms, including:
+\itemize{
+\item \code{taid} (Tactic ID) the official MITRE ATT&CK tactic id (e.g. "\code{TA0001}")
+\item \code{id} (Tactic text id) lowercase-dashed name (e.g. "\code{initial-access}")
+\item \code{pretty} (Tactic text) Upper/lowercase name suitable for display (e.g. "\code{Initial Access}")
+\item \code{nl} (Tactic text) same as ^ but w/newlines for space constrained display (e.g. "\code{Initial\\nAccess}")
+}
+}
+\examples{
+fct_tactic(c("initial-access", "persistence"), "id", "nl")
 }
 \seealso{
 \link{tactics_f} for direct access to the ordered Tactics

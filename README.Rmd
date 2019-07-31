@@ -1,5 +1,7 @@
 ---
 output: rmarkdown::github_document
+editor_options: 
+  chunk_output_type: console
 ---
 ```{r pkg-knitr-opts, include=FALSE}
 hrbrpkghelpr::global_opts()
@@ -19,6 +21,14 @@ The following functions are implemented:
 
 ```{r ingredients, results='asis', echo=FALSE, cache=FALSE}
 hrbrpkghelpr::describe_ingredients()
+```
+
+The following datasets are included:
+
+```{r datasets, echo=FALSE, results="asis"}
+d <- as.data.frame(data(package = "attckr")$results[,c("Item", "Title")], stringsAsFactors=FALSE)
+d$Item <- sprintf("`%s`", d$Item)
+cat(sprintf("- %s: %s", d$Item, d$Title), sep="\n")
 ```
 
 ## Installation

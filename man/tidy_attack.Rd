@@ -7,3 +7,6 @@
 \description{
 Combined ATT&CK Matricies Tactics, Techniques and Technique detail
 }
+\note{
+Last updated: 2019-07-31
+}
