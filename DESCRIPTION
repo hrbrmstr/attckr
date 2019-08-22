@@ -25,7 +25,10 @@ Suggests:
     testthat,
     covr
 Depends:
-    R (>= 3.2.0)
+    R (>= 3.2.0),
+    grid,
+    gtable,
+    ggplot2
 Imports:
     jsonlite,
     tibble,

@@ -32,6 +32,7 @@ CTI Corpus.
 
 The following functions are implemented:
 
+  - `attck_map`: Generate an ATT\&CK heatmap
   - `enterprise_attack`: Enterprise Attack Taxonomy v2.0
   - `fct_tactic`: Make an ordered Tactics factor with optional better
     labelling
@@ -81,6 +82,7 @@ NOTE: To use the ‘remotes’ install options you will need to have the
 
 ``` r
 library(attckr)
+library(hrbrthemes)
 library(tidyverse)
 
 # current version
@@ -123,24 +125,17 @@ events <- read_events(system.file("extdat/sample-incidents.csv.gz", package = "a
 ## You appear to be using Tactic ids.
 ## You appear to be using Techinque ids.
 
-count(head(events, 30), tactic, technique) %>%
-  mutate(tactic = fct_tactic(tactic, "pretty", "nl")) %>%
-  left_join(
-    filter(tidy_attack, matrix == "mitre-attack") %>%
-      distinct(id, technique),
-    c("technique" = "id")
-  ) %>%
-  complete(tactic, technique.y) %>%
-  mutate(technique.y = factor(technique.y, rev(sort(unique(technique.y))))) %>%
-  ggplot(aes(tactic, technique.y)) +
-  geom_tile(aes(fill = n), color = "#2b2b2b", size = 0.125) +
-  scale_x_discrete(expand = c(0, 0), position = "top") +
-  scale_fill_viridis_c(direction = -1, na.value = "white") +
-  labs(
-    x = NULL, y = NULL
+attck_map(
+  events, "pretty", "nl", "enterprise",
+  dark_value_threshold = 1,
+  size = 3, family = font_rc, lineheight = 0.875
+) +
+  scale_fill_distiller(
+    palette = "Spectral", na.value = "white", label = scales::comma, breaks = 1:3
   ) +
-  theme_minimal() +
-  theme(panel.grid=element_blank())
+  labs(x = NULL, y = NULL, fill = NULL) +
+  theme_ipsum_rc(grid="") +
+  theme(axis.text.y = element_blank())
 ```
 
 <img src="man/figures/README-events-1.png" width="1056" />
@@ -149,8 +144,8 @@ count(head(events, 30), tactic, technique) %>%
 
 | Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 | :--- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
-| R    |       10 | 0.91 | 203 | 0.86 |          57 | 0.74 |      144 | 0.81 |
-| Rmd  |        1 | 0.09 |  32 | 0.14 |          20 | 0.26 |       34 | 0.19 |
+| R    |       11 | 0.92 | 245 | 0.91 |          65 | 0.76 |      166 | 0.83 |
+| Rmd  |        1 | 0.08 |  24 | 0.09 |          20 | 0.24 |       34 | 0.17 |
 
 ## Code of Conduct
 

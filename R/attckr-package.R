@@ -15,7 +15,8 @@
 #' @author Bob Rudis (bob@@rud.is)
 #' @import tibble ggplot2 shiny rmarkdown stringi
 #' @importFrom glue glue
-#' @importFrom dplyr filter distinct mutate select case_when
+#' @importFrom dplyr filter distinct mutate select case_when group_by arrange count n
 #' @importFrom readr read_csv
 #' @importFrom jsonlite fromJSON
+#' @import ggplot2 grid gtable
 "_PACKAGE"
