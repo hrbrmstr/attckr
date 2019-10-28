@@ -7,7 +7,9 @@ by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keyb
 ![Signed commit
 %](https://img.shields.io/badge/Signed_Commits-100%25-lightgrey.svg)
 [![Linux build
-Status](https://travis-ci.org/hrbrmstr/attckr.svg?branch=master)](https://travis-ci.org/hrbrmstr/attckr)  
+Status](https://travis-ci.org/hrbrmstr/attckr.svg?branch=master)](https://travis-ci.org/hrbrmstr/attckr)
+[![Coverage
+Status](https://codecov.io/gh/hrbrmstr/attckr/branch/master/graph/badge.svg)](https://codecov.io/gh/hrbrmstr/attckr)
 ![Minimal R
 Version](https://img.shields.io/badge/R%3E%3D-3.2.0-blue.svg)
 ![License](https://img.shields.io/badge/License-Apache-blue.svg)
@@ -32,6 +34,8 @@ CTI Corpus.
 
 The following functions are implemented:
 
+  - `attck_cdf_tactic`: Product an ATT\&CK Cumulative Distribution
+    Function by Tactic
   - `attck_map`: Generate an ATT\&CK heatmap
   - `enterprise_attack`: Enterprise Attack Taxonomy v2.0
   - `fct_tactic`: Make an ordered Tactics factor with optional better
@@ -41,6 +45,7 @@ The following functions are implemented:
   - `read_events`: Read in ATT\&CK events from a file
   - `tactics_f`: Tactics factors (generally for sorting &
     pretty-printing)
+  - `theme_enhance_atkmap`: Remove cruft from ATT\&CK heatmaps
   - `tidy_attack`: Combined ATT\&CK Matricies Tactics, Techniques and
     Technique detail
   - `validate_tactics`: Validate Tactics strings against MITRE
@@ -87,25 +92,25 @@ library(tidyverse)
 
 # current version
 packageVersion("attckr")
-## [1] '0.1.0'
+## [1] '0.2.0'
 ```
 
 ``` r
 tidy_attack
-## # A tibble: 708 x 5
-##    technique          description                                                        id      tactic        matrix   
-##    <chr>              <chr>                                                              <chr>   <chr>         <chr>    
-##  1 .bash_profile and… "<code>~/.bash_profile</code> and <code>~/.bashrc</code> are exec… T1156   persistence   mitre-at…
-##  2 Access Token Mani… "Windows uses access tokens to determine the ownership of a runni… T1134   defense-evas… mitre-at…
-##  3 Access Token Mani… "Windows uses access tokens to determine the ownership of a runni… T1134   privilege-es… mitre-at…
-##  4 Accessibility Fea… "Windows contains accessibility features that may be launched wit… T1015   persistence   mitre-at…
-##  5 Accessibility Fea… "Windows contains accessibility features that may be launched wit… T1015   privilege-es… mitre-at…
-##  6 Accessibility Fea… "Windows contains accessibility features that may be launched wit… CAPEC-… persistence   mitre-at…
-##  7 Accessibility Fea… "Windows contains accessibility features that may be launched wit… CAPEC-… privilege-es… mitre-at…
-##  8 Account Discovery  "Adversaries may attempt to get a listing of local system or doma… T1087   discovery     mitre-at…
-##  9 Account Discovery  "Adversaries may attempt to get a listing of local system or doma… CAPEC-… discovery     mitre-at…
-## 10 Account Manipulat… Account manipulation may aid adversaries in maintaining access to… T1098   credential-a… mitre-at…
-## # … with 698 more rows
+## # A tibble: 795 x 5
+##    technique          description                                                        id      matrix    tactic       
+##    <chr>              <chr>                                                              <chr>   <chr>     <chr>        
+##  1 .bash_profile and… "<code>~/.bash_profile</code> and <code>~/.bashrc</code> are shel… T1156   mitre-at… persistence  
+##  2 Access Token Mani… "Windows uses access tokens to determine the ownership of a runni… T1134   mitre-at… defense-evas…
+##  3 Access Token Mani… "Windows uses access tokens to determine the ownership of a runni… T1134   mitre-at… privilege-es…
+##  4 Access Token Mani… "Windows uses access tokens to determine the ownership of a runni… CAPEC-… mitre-at… defense-evas…
+##  5 Access Token Mani… "Windows uses access tokens to determine the ownership of a runni… CAPEC-… mitre-at… privilege-es…
+##  6 Accessibility Fea… "Windows contains accessibility features that may be launched wit… T1015   mitre-at… persistence  
+##  7 Accessibility Fea… "Windows contains accessibility features that may be launched wit… T1015   mitre-at… privilege-es…
+##  8 Accessibility Fea… "Windows contains accessibility features that may be launched wit… CAPEC-… mitre-at… persistence  
+##  9 Accessibility Fea… "Windows contains accessibility features that may be launched wit… CAPEC-… mitre-at… privilege-es…
+## 10 Account Access Re… "Adversaries may interrupt availability of system and network res… T1531   mitre-at… impact       
+## # … with 785 more rows
 ```
 
 ``` r
@@ -144,8 +149,8 @@ attck_map(
 
 | Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 | :--- | -------: | ---: | --: | ---: | ----------: | ---: | -------: | ---: |
-| R    |       11 | 0.92 | 245 | 0.91 |          65 | 0.76 |      166 | 0.83 |
-| Rmd  |        1 | 0.08 |  24 | 0.09 |          20 | 0.24 |       34 | 0.17 |
+| R    |       13 | 0.93 | 304 | 0.93 |          72 | 0.78 |      180 | 0.84 |
+| Rmd  |        1 | 0.07 |  24 | 0.07 |          20 | 0.22 |       34 | 0.16 |
 
 ## Code of Conduct
 

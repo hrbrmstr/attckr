@@ -67,7 +67,6 @@ mobile_attack[["objects"]] <- tibble::as_tibble(mobile_attack[["objects"]])
 
 # Make Pre matrix ---------------------------------------------------------
 
-
 jsonlite::fromJSON(
   here::here("data-raw/pre-attack.json.xz")
 ) -> pre_attack
@@ -86,7 +85,7 @@ bind_rows(
       id = discard(enterprise_attack$objects$external_references[[.x]]$external_id, is.na) %||% NA_character_,
       phs = enterprise_attack$objects$kill_chain_phases[.x]
     ) %>%
-      unnest()
+      unnest(phs)
   }),
   map_df(1:nrow(mobile_attack$objects), ~{
     if (is.na(mobile_attack$objects$name[[.x]])) return(NULL)
@@ -97,7 +96,7 @@ bind_rows(
       id = discard(mobile_attack$objects$external_references[[.x]]$external_id, is.na) %||% NA_character_,
       phs = mobile_attack$objects$kill_chain_phases[.x]
     ) %>%
-      unnest()
+      unnest(phs)
   }),
   map_df(1:nrow(pre_attack$objects), ~{
     if (is.na(pre_attack$objects$name[[.x]])) return(NULL)
@@ -108,7 +107,7 @@ bind_rows(
       id = discard(pre_attack$objects$external_references[[.x]]$external_id, is.na) %||% NA_character_,
       phs = pre_attack$objects$kill_chain_phases[.x]
     ) %>%
-      unnest()
+      unnest(phs)
   })
 ) %>%
   rename(tactic = phase_name, matrix = kill_chain_name) %>%

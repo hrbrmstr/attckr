@@ -8,9 +8,9 @@
 Mobile Attack Taxonomy v2.0
 }
 \note{
-Id: \code{bundle--eeb1ff74-2747-4602-96fb-e7b220361101}
+Id: \code{bundle--d22f39d8-4fa0-4557-a925-1d7bbaffaa46}
 
-Last updated: 2019-07-31
+Last updated: 2019-10-24
 }
 \references{
 \url{https://github.com/mitre/cti/raw/master/mobile-attack/mobile-attack.json}

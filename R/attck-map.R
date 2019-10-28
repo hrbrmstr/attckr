@@ -61,9 +61,12 @@ attck_map <- function(xdf, input = NULL, output = NULL, matrix = NULL,
     aes(
       label = technique,
       color = I(ifelse(value <= dark_value_threshold, dark_lab, light_lab))
-    ), ...
+    ), lineheight = 0.875, ...
   )
-  gg <- gg + scale_x_discrete(expand = c(0, 0), position = "top")
+  gg <- gg + scale_x_discrete(
+    expand = c(0, 0), position = "top",
+    labels = levels(xdf$tactic), limits = levels(xdf$tactic)
+  )
   gg <- gg + scale_y_reverse(expand = c(0, 0))
 
   gg

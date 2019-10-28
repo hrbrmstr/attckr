@@ -8,9 +8,9 @@
 Enterprise Attack Taxonomy v2.0
 }
 \note{
-Id: \code{bundle--24c77e72-f42e-48e5-9f6c-5ddfc02e8399}
+Id: \code{bundle--83dad14b-ae53-4473-9f95-5ae37c8eaa5d}
 
-Last updated: 2019-07-31
+Last updated: 2019-10-24
 }
 \references{
 \url{https://github.com/mitre/cti/raw/master/enterprise-attack/enterprise-attack.json}

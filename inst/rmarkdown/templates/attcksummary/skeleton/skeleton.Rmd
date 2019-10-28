@@ -1,0 +1,312 @@
+---
+title: "ATT&CK Metrics Overview"
+output:
+    html_document:
+      toc: true
+      toc_float: true
+      toc_depth: 2
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  fig.retina = 2,
+  fig.width=900/72, 
+  fig.height = 700/72
+)
+```
+
+```{r libs}
+library(hrbrthemes)
+library(attckr)
+library(tidyverse)
+```
+
+```{r atk-data}
+xdf <- readRDS(system.file("extdat/more-incidents.rds", package = "attckr"))
+xdf <- mutate(xdf, quarter = sprintf("Q%d", lubridate::quarter(containment_ts)))
+xdf <- mutate(xdf, month = lubridate::month(containment_ts, abbr=FALSE, label=TRUE))
+```
+
+# Dwell Time
+
+```{r dwell-calc}
+xdf %>% 
+  mutate(delta = as.numeric(containment_ts - first_event_ts, "days")) %>% 
+  ungroup() %>% 
+  mutate(
+    delta_ord = case_when(
+      delta < 1 ~ "< 1 day",
+      delta < 2 ~ "1 day",
+      delta <= 7 ~ "1 week",
+      delta <= 14 ~ "2 weeks",
+      delta <= 28 ~ "1 month",
+      delta <= 46 ~ "2 months",
+      delta <= 84 ~ "3 months",
+      delta <= 112 ~ ">1 qtr",
+      is.na(delta) ~ "Unknown",
+      TRUE ~ "> 1 qtr"
+    )
+  ) %>% 
+  mutate(
+    delta_ord = factor(delta_ord, levels = c("< 1 day", "1 day", "1 week", "2 weeks", "1 month", "2 months", "3 months", ">1 qtr", "Unknown"))
+  ) -> dwell_df
+```
+
+## Overall
+
+```{r dwell-time-overall, fig.height = 400/72}
+count(dwell_df, delta_ord) %>% 
+  mutate(pct = n/sum(n)) %>% 
+  ggplot(aes(delta_ord, pct)) +
+  geom_col(width=0.55, fill = ft_cols$blue) +
+  scale_y_percent(limits = c(0, 1)) +
+  labs(
+    x = NULL, y = "% Incidents",
+    title = "Dwell Time % (Overall)"
+  ) +
+  theme_ipsum_es(grid="Y") +
+  theme(legend.position = "bottom")
+```
+
+## by Quarter
+
+```{r dwell-time-quarter, fig.height = 900/72}
+count(dwell_df, quarter, delta_ord) %>% 
+  group_by(quarter) %>% 
+  mutate(pct = n/sum(n)) %>% 
+  ungroup() %>% 
+  ggplot(aes(delta_ord, pct)) +
+  geom_col(width=0.55, fill = ft_cols$blue) +
+  scale_x_discrete(
+    breaks = c("< 1 day", "1 day", "1 week", "2 weeks", "1 month", "2 months", "3 months", ">1 qtr", "Unknown"), 
+    limits = c("< 1 day", "1 day", "1 week", "2 weeks", "1 month", "2 months", "3 months", ">1 qtr", "Unknown")
+  ) +
+  scale_y_percent(limits = c(0, 1)) +
+  facet_wrap(~quarter, ncol=1, scales = "free") +
+  labs(
+    x = NULL, y = "% Incidents",
+    title = "Dwell Time % (by Quarter)"
+  ) +
+  theme_ipsum_es(grid="Y") +
+  theme(legend.position = "bottom")
+```
+
+```{r dwell-time-quarter-line}
+count(dwell_df, quarter, delta_ord) %>% 
+  group_by(quarter) %>% 
+  mutate(pct = n/sum(n)) %>% 
+  ungroup() %>% 
+  arrange(quarter) %>% 
+  mutate(quarter = fct_inorder(as.character(quarter)) %>% fct_rev()) %>% 
+  complete(quarter, delta_ord) %>% 
+  ggplot(aes(quarter, pct, group = delta_ord, color = delta_ord)) +
+  geom_line() +
+  geom_label(
+    aes(
+      label = scales::percent(pct),
+    ), lineheight = 0.875, family = font_es, size = 4, show.legend = FALSE
+  ) +
+  scale_x_discrete(position = "top") +
+  scale_y_percent(limits = c(-0.05, 1.05)) +
+  labs(
+    x = NULL, y = NULL, color = 'Dwell Time',
+    title = "Dwell Time % (by Quarter)"
+  ) +
+  theme_ipsum_es(grid="Y") +
+  theme(legend.position = "bottom")
+```
+
+## by Month
+
+```{r dwell-time-month}
+count(dwell_df, month, delta_ord) %>% 
+  group_by(month) %>% 
+  mutate(pct = n/sum(n)) %>% 
+  ungroup() %>% 
+  arrange(month) %>% 
+  mutate(month = fct_inorder(as.character(month)) %>% fct_rev()) %>% 
+  complete(month, delta_ord) %>% 
+  ggplot(aes(delta_ord, month)) +
+  geom_tile(aes(fill = pct), color = "white", size = 0.5) +
+  geom_text(
+    aes(
+      label = scales::percent(pct),
+      color = I(ifelse(pct > 0.1, "white", "black"))
+    ), lineheight = 0.875, family = font_es, size = 4
+  ) +
+  scale_x_discrete(position = "top") +
+  scale_fill_viridis_c(
+    option = "magma", direction = -1, trans = "identity", label = scales::percent
+  ) +
+  labs(
+    x = NULL, y = NULL, fill = '%',
+    title = "Dwell Time % (by Month)"
+  ) +
+  theme_ipsum_es(grid="Y") +
+  theme(legend.position = "bottom") +
+  theme(legend.key.width = unit(3, "lines"))
+```
+
+```{r dwell-time-month-line}
+count(dwell_df, month, delta_ord) %>% 
+  group_by(month) %>% 
+  mutate(pct = n/sum(n)) %>% 
+  ungroup() %>% 
+  arrange(month) %>% 
+  mutate(month = fct_inorder(as.character(month)) %>% fct_rev()) %>% 
+  complete(month, delta_ord) %>% 
+  ggplot(aes(month, pct, group = delta_ord, color = delta_ord)) +
+  geom_line() +
+  geom_label(
+    aes(
+      label = scales::percent(pct),
+    ), lineheight = 0.875, family = font_es, size = 4, show.legend = FALSE
+  ) +
+  scale_x_discrete(position = "top") +
+  scale_y_percent(limits = c(-0.05, 1.05)) +
+  labs(
+    x = NULL, y = NULL, color = 'Dwell Time',
+    title = "Dwell Time % (by Month)"
+  ) +
+  theme_ipsum_es(grid="Y") +
+  theme(legend.position = "bottom")
+```
+
+# ATT&CK Heatmap
+
+## Overall
+
+```{r}
+unnest(xdf, mitre_attack) %>% 
+  select(tactic, technique) %>% 
+  attck_map(
+    input = "pretty", output = "nl", matrix = "enterprise",
+    family = font_es, size = 3
+  ) +
+  scale_fill_viridis_c(option = "magma") +
+  guides(
+    fill = guide_colourbar(title.position = "top")
+  ) +
+  labs(
+    fill = "Tactics Raw Count: ",
+    title = "Overall ATT&CK Heatmap"
+  ) +
+  theme_ipsum_es(grid="") +
+  theme_enhance_atkmap()
+```
+
+## by Quarter
+
+```{r heatmap-by-quarter, fig.width = 1200/72, fig.height = 1200/72}
+unnest(xdf, mitre_attack) %>% 
+  mutate(quarter = sprintf("Q%d", lubridate::quarter(containment_ts))) %>% 
+  count(quarter, tactic, technique) %>% 
+  mutate(
+    tactic = fct_tactic(tactic, "pretty", "nl", "enterprise"),
+    technique = gsub("[[:space:]]+", "\n", technique),
+  ) %>% 
+  group_by(quarter, tactic) %>% 
+  mutate(ids = (n():1)) -> plot_df
+
+plot_df %>% 
+  ggplot(aes(tactic, ids)) +
+  geom_tile(aes(fill = n), color = "white") +
+  geom_text(
+    aes(
+      label = technique,
+      color = I(ifelse(n > 20, "black", "white"))
+    ),
+    family = font_es, size = 3, lineheight = 0.875
+  ) +
+  scale_x_discrete(
+    breaks = levels(plot_df$tactic), limits = levels(plot_df$tactic),
+    position = "top"
+  ) +
+  scale_y_reverse() +
+  scale_fill_viridis_c(option = "magma", trans = "log10", label = scales::comma) +
+  facet_wrap(~quarter, ncol = 1, scales = "free") +
+  guides(
+    fill = guide_colourbar(title.position = "top")
+  ) +
+  labs(
+    fill = "Tactics Raw Count: ",
+    title = "Quarterly ATT&CK Heatmap"
+  ) +
+  theme_ipsum_es(grid="") +
+  theme_enhance_atkmap() +
+  theme(strip.placement = "outside")
+```
+
+# Cumulative ATT&CK Tactics Distributions
+
+## Overall
+
+```{r attck-cdf-all}
+unnest(xdf, mitre_attack) %>% 
+  count(tactic) %>% 
+  mutate(tactic = fct_tactic(tactic, "pretty", "nl")) %>% 
+  arrange(tactic) %>% 
+  mutate(pct = n/sum(n)) %>% 
+  mutate(cpct = cumsum(pct)) -> cdf
+
+ggplot(cdf, aes(tactic, cpct, group=1)) +
+  geom_path() +
+  geom_label(
+    aes(
+      label = sprintf("%s\n%s\n%s", scales::comma(n), scales::percent(pct), scales::percent(cpct)),
+    ), lineheight = 0.875, family = font_es, size = 3
+  ) +
+  scale_x_discrete(
+    expand = c(0, 0.5), position = "top",
+    breaks = levels(cdf$tactic), limits = levels(cdf$tactic)
+  ) +
+  scale_y_continuous(
+    expand = c(0, 0.05), limits = c(-0.05, 1.05), label = scales::percent
+  ) +
+  labs(
+    x = NULL, y = NULL,
+    title = "ATT&CK Tactics Cumulative Distribution (All Time)"
+  ) +
+  theme_ipsum_es(grid="XY")
+```
+
+## by Industry
+
+```{r attck-cdf-industry}
+unnest(xdf, mitre_attack) %>% 
+  count(tactic, industry) %>% 
+  mutate(tactic = fct_tactic(tactic, "pretty", "nl")) %>% 
+  arrange(tactic) %>% 
+  group_by(industry) %>% 
+  mutate(pct = n/sum(n)) %>% 
+  mutate(cpct = cumsum(pct)) %>% 
+  ungroup() -> cdf
+
+ggplot(cdf, aes(tactic, cpct, group=industry)) +
+  geom_path(aes(colour = industry)) +
+  geom_label(
+    aes(
+      label = sprintf("%s\n%s\n%s", scales::comma(n), scales::percent(pct), scales::percent(cpct)),
+      color = industry, 
+    ), lineheight = 0.875, family = font_es, size = 3, show.legend = FALSE
+  ) +
+  scale_x_discrete(
+    expand = c(0, 0.5), position = "top",
+    breaks = levels(cdf$tactic), limits = levels(cdf$tactic)
+  ) +
+  scale_y_continuous(
+    expand = c(0, 0.05), limits = c(-0.05, 1.05), label = scales::percent
+  ) +
+  ggthemes::scale_colour_tableau("Tableau 20") +
+  labs(
+    x = NULL, y = NULL, colour = NULL,
+    title = "ATT&CK Tactics Cumulative Distribution By Industry"
+  ) +
+  theme_ipsum_es(grid="XY") +
+  theme(legend.position = "bottom")
+```
