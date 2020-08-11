@@ -8,5 +8,5 @@
 Tactics factors (generally for sorting & pretty-printing)
 }
 \note{
-Last updated: 2019-10-24
+Last updated: 2020-06-17
 }

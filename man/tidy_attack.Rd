@@ -8,5 +8,5 @@
 Combined ATT&CK Matricies Tactics, Techniques and Technique detail
 }
 \note{
-Last updated: 2019-10-24
+Last updated: 2020-06-17
 }

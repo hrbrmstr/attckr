@@ -4,8 +4,11 @@
 \alias{validate_tactics}
 \title{Validate Tactics strings against MITRE authoritative source}
 \usage{
-validate_tactics(tactics, matrix = c("enterprise", "mobile", "pre"),
-  na_rm = TRUE)
+validate_tactics(
+  tactics,
+  matrix = c("enterprise", "mobile", "pre"),
+  na_rm = TRUE
+)
 }
 \arguments{
 \item{tactics}{a character vector of tactic strings to validate. This will be

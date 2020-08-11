@@ -4,9 +4,18 @@
 \alias{attck_map}
 \title{Generate an ATT&CK heatmap}
 \usage{
-attck_map(xdf, input = NULL, output = NULL, matrix = NULL,
-  tile_col = "white", tile_size = 0.5, dark_lab = "white",
-  light_lab = "black", dark_value_threshold = NULL, ...)
+attck_map(
+  xdf,
+  input = NULL,
+  output = NULL,
+  matrix = NULL,
+  tile_col = "white",
+  tile_size = 0.5,
+  dark_lab = "white",
+  light_lab = "black",
+  dark_value_threshold = NULL,
+  ...
+)
 }
 \arguments{
 \item{xdf}{a data frame with \code{tactic}, \code{technique} and \code{value} columns.

@@ -4,8 +4,7 @@
 \alias{attck_cdf_tactic}
 \title{Product an ATT&CK Cumulative Distribution Function by Tactic}
 \usage{
-attck_cdf_tactic(xdf, input = NULL, output = NULL, matrix = NULL,
-  ...)
+attck_cdf_tactic(xdf, input = NULL, output = NULL, matrix = NULL, ...)
 }
 \arguments{
 \item{xdf}{a data frame with \code{tactic}, \code{technique} and \code{value} columns.

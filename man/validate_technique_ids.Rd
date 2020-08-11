@@ -4,8 +4,11 @@
 \alias{validate_technique_ids}
 \title{Validate Technique IDs}
 \usage{
-validate_technique_ids(technique_ids, matrix = c("enterprise", "mobile",
-  "pre"), na_rm = TRUE)
+validate_technique_ids(
+  technique_ids,
+  matrix = c("enterprise", "mobile", "pre"),
+  na_rm = TRUE
+)
 }
 \arguments{
 \item{technique_ids}{a character vector of technique ids to validate}

@@ -46,7 +46,7 @@ combination of \code{event_id} and \code{incident_id}.
 You can think of \code{discovery_source} & \code{reporting_source} this way: say
 the Windows Event Log captured the evidence of a failed (or successful)
 local admin logon event. It passes that on to your centralized logging
-facility and/or your SIEM. You can make \code{discovery_source} "\code{Windows Event Log}"
+facility and/or your SIEM. You can make \code{discovery_source} "\verb{Windows Event Log}"
 and \code{reporting_source} whichever technology you used.
 
 Any column not-present will be turned into \code{NA}. Columns not matching the

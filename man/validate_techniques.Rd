@@ -4,8 +4,12 @@
 \alias{validate_techniques}
 \title{Validate Techniques strings against MITRE authoritative source}
 \usage{
-validate_techniques(techniques, matrix = c("enterprise", "mobile",
-  "pre"), ignore_case = FALSE, na_rm = TRUE)
+validate_techniques(
+  techniques,
+  matrix = c("enterprise", "mobile", "pre"),
+  ignore_case = FALSE,
+  na_rm = TRUE
+)
 }
 \arguments{
 \item{matrix}{which matrix to use when validating?}

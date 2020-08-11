@@ -4,7 +4,7 @@
 #' @title Enterprise Attack Taxonomy v2.0
 #' @name enterprise_attack
 #' @note Id: `bundle--83dad14b-ae53-4473-9f95-5ae37c8eaa5d`
-#' @note Last updated: 2019-10-24
+#' @note Last updated: 2020-06-17
 #' @references <https://github.com/mitre/cti/raw/master/enterprise-attack/enterprise-attack.json>
 #' @docType data
 NULL
@@ -12,7 +12,7 @@ NULL
 #' @title Mobile Attack Taxonomy v2.0
 #' @name mobile_attack
 #' @note Id: `bundle--d22f39d8-4fa0-4557-a925-1d7bbaffaa46`
-#' @note Last updated: 2019-10-24
+#' @note Last updated: 2020-06-17
 #' @references <https://github.com/mitre/cti/raw/master/mobile-attack/mobile-attack.json>
 #' @docType data
 NULL
@@ -20,19 +20,19 @@ NULL
 #' @title Pre-Attack Taxonomy v2.0
 #' @name pre_attack
 #' @note Id: `bundle--803f51fd-e986-493c-9ab1-0b33b42a4dec`
-#' @note Last updated: 2019-10-24
+#' @note Last updated: 2020-06-17
 #' @references <https://github.com/mitre/cti/raw/master/pre-attack/pre-attack.json>
 #' @docType data
 NULL
 
 #' @title Combined ATT&CK Matricies Tactics, Techniques and Technique detail
 #' @name tidy_attack
-#' @note Last updated: 2019-10-24
+#' @note Last updated: 2020-06-17
 #' @docType data
 NULL
 
 #' @title Tactics factors (generally for sorting & pretty-printing)
 #' @name tactics_f
-#' @note Last updated: 2019-10-24
+#' @note Last updated: 2020-06-17
 #' @docType data
 NULL

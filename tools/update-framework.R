@@ -175,6 +175,11 @@ tactics_f[["mitre-attack"]] <- ent_tac
 tactics_f[["mitre-pre-attack"]] <- pre_tac
 tactics_f[["mitre-mobile-attack"]] <- mob_tac
 
+# Mitigations -------------------------------------------------------------
+
+et_tbl <- read_html("https://attack.mitre.org/tactics/enterprise/") %>% html_nodes("table")
+
+
 # Save it all out ---------------------------------------------------------
 
 usethis::use_data(

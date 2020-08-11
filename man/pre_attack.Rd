@@ -8,9 +8,9 @@
 Pre-Attack Taxonomy v2.0
 }
 \note{
-Id: \code{bundle--803f51fd-e986-493c-9ab1-0b33b42a4dec}
+Id: \verb{bundle--803f51fd-e986-493c-9ab1-0b33b42a4dec}
 
-Last updated: 2019-10-24
+Last updated: 2020-06-17
 }
 \references{
 \url{https://github.com/mitre/cti/raw/master/pre-attack/pre-attack.json}
